@@ -11,7 +11,7 @@ class ApiError extends Error{
         this.data= null
         this.message= message
         this.success= false// koyki asi suuces nhi failure handle kre a
-        this.errors=errors
+        this.errors=error
 
         if(statck){
             // ye  pta lgta ha k kon kon si place ma kya error hai
