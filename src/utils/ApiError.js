@@ -2,8 +2,8 @@ class ApiError extends Error{
     constructor(
         statusCode,
         message= "Something went Wrong",
-        error=[],
-        statck = ""//ie error stack
+        errors=[],
+        stack = ""//ie error stack
     ){
         //ethe overide krde a
         super(message)
@@ -11,11 +11,11 @@ class ApiError extends Error{
         this.data= null
         this.message= message
         this.success= false// koyki asi suuces nhi failure handle kre a
-        this.errors=error
+        this.errors=errors
 
-        if(statck){
+        if(stack){
             // ye  pta lgta ha k kon kon si place ma kya error hai
-            this.stack=statck
+            this.stack=stack
         }else{
             Error.captureStackTrace(this,this.constructor)
         }
