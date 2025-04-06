@@ -52,7 +52,7 @@ const userSchema = new Schema({
 
 userSchema.pre("save",async function(next){
     if(!this.isModified("password")) return next();
-    this.password = bcrypt.hash(this.password, 10)
+    this.password =await bcrypt.hash(this.password, 10)
     next()
 })// avoid writing arrow function in pre hook it cereates problem also pre ik hook hai jo pre ch km krdi hai 
 //since eh middleware hai ute vali like tn next flag tn hona hi hona hai kyokikmhon to baad next cheej nu km v tn sompna
