@@ -17,4 +17,12 @@ app.use(express.static("public"))//stattic nl asi files folrder like odf images 
 app.use(cookieParser())
 
 
+
+//routes import
+import userRouter from "./routes/user.routes.js"
+
+//routes declaration
+app.use("/api/v1/users",userRouter) // jdo /users te jayega tn oh controll userRouter nu deduga te oh file ch asi working dsi hoi a k kida ki krna
+//http://localhost:8000/api/v1/users/register  ya login etc eve chlega eh kyoki userROUTER CH HAI SARI ROUTES
+
 export { app }
