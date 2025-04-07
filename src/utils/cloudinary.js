@@ -1,6 +1,6 @@
 import { v2 as cloudinary} from "cloudinary";
 import fs from 'fs'//fs is file system eh already node de pckage ch hundi a added eh read,write,remove etc kranda km file system sara 
-import { v2 as cloudinary } from 'cloudinary';
+
 import { resolve } from "path";
 
  // Configuration
@@ -20,6 +20,8 @@ const uploadonCloudinary = async(localFilePath)=>{
 
         //file has been uploaded succesfeully
         console.log("file hase been upload on cloudinary",response.url);
+        //upload krk ulicnk kro file
+        fs.unlinkSync(localFilePath)
         return response;
     }
     catch(error){
@@ -28,7 +30,7 @@ const uploadonCloudinary = async(localFilePath)=>{
         return null;
     }
 }
-
+ 
 export {uploadonCloudinary} 
    
     

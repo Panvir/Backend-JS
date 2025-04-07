@@ -1,9 +1,9 @@
 import multer from 'multer'
-
+import path from 'path'
 const storage = multer.diskStorage({
     destination: function (req, file, cb)//file eh dsri k data nl file ari hoi je
      {
-      cb(null, "../public/temp")//cb means callback and jo sexond field hai oh path jithe asi store krania files temoporary
+      cb(null, path.resolve('public/temp'))//cb means callback and jo sexond field hai oh path jithe asi store krania files temoporary
     },
     filename: function (req, file, cb) {
       
