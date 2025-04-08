@@ -1,5 +1,6 @@
 import multer from 'multer'
 import path from 'path'
+//storage ka middleware bnare a asi hun
 const storage = multer.diskStorage({
     destination: function (req, file, cb)//file eh dsri k data nl file ari hoi je
      {

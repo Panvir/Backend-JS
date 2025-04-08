@@ -62,7 +62,7 @@ userSchema.pre("save",async function(next){
 //so custom methid bnande a 
 userSchema.methods.isPassordCorrect = async function (password) {
   return await bcrypt.compare(password, this.password)// ehte sada bcypt hi pass nu check kreha ahi  2nf argumet sade db ch jo exrpy pass hai ohnu refer kreha hia
-//compare true false dindi a
+//compare true false dindi a // this .password save suser vale da pass hai jo db ch stored hai
 }
 
 
