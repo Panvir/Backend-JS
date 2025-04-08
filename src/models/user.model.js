@@ -34,7 +34,7 @@ const userSchema = new Schema({
     },
     watchHistory:[//obv array di form ch ani a kyoki multiple add hingia
         {
-            type:mongoose.Schema.Types.ObjectId,
+            type:Schema.Types.ObjectId,
             ref:"Video"
         }
     ],
@@ -60,7 +60,7 @@ userSchema.pre("save",async function(next){
 
 //hun gl a sanu method bnana pyu like k jdo pass enter kre user tdo khule pr gl a pass tn oh normal enter kreha user sade db ch tn excrpyt store hoteha so asi hun ehte km kre a
 //so custom methid bnande a 
-userSchema.methods.isPassordCorrect = async function (password) {
+userSchema.methods.isPasswordCorrect = async function (password) {
   return await bcrypt.compare(password, this.password)// ehte sada bcypt hi pass nu check kreha ahi  2nf argumet sade db ch jo exrpy pass hai ohnu refer kreha hia
 //compare true false dindi a // this .password save suser vale da pass hai jo db ch stored hai
 }
@@ -77,7 +77,7 @@ userSchema.methods.generateAccesToken=function(){
          },
          process.env.ACCESS_TOKEN_SECRET,
          {
-            expiresIn:process.env.ACESS_TOKEN_EXPIRY
+            expiresIn:process.env.ACCESS_TOKEN_EXPIRY
          }
     )
 }
