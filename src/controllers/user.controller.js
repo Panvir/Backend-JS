@@ -241,3 +241,8 @@ export { registerUser,
           loginUser,
           logoutUser,refreshAccessToken
  };
+
+ // Concept	Explanation
+// Access Token	Self-contained token with user info
+// Signed Using	ACCESS_TOKEN_SECRET (stored in .env)
+// Verified Using	Same secret → makes sure token is authentic
