@@ -259,7 +259,7 @@ return res.status(200)
 
 //<-------------------------------getCurrentUser------------------------------------------------------->>>>>>>>>>
 const getCurrentUser=asyncHandler(async(req,res)=>{
-  return res.status(200).json(200,req.user,"current user fetched successfully")//req.user ape chlega kyoki auth vele jo middleware chleya hai ohch req.user ch current user hai because in routes verify jwt runs in thath midlerware we had alread putter req.user - user
+  return res.status(200).json(new ApiResponse(200,req.user,"current user fetched successfully"))//req.user ape chlega kyoki auth vele jo middleware chleya hai ohch req.user ch current user hai because in routes verify jwt runs in thath midlerware we had alread putter req.user - user
 })
 //<--------------------updateAccountDetails-------------->
 const updateAccountDetails=asyncHandler(async(req,res)=>{
@@ -268,7 +268,7 @@ const updateAccountDetails=asyncHandler(async(req,res)=>{
     throw new ApiError(400,"All fields are required")
   }
 
- const user= User.findByIdAndUpdate(req.user?._id,{$set:{fullName:fullName,email:email}},{new:true}).select("-password")
+ const user=await User.findByIdAndUpdate(req.user?._id,{$set:{fullName:fullName,email:email}},{new:true}).select("-password")
  return res.status(200)
  .json(new ApiResponse(200,user,"Account detail updated successfully"))
 })
