@@ -401,13 +401,66 @@ if(!channel?.length){
 return res.status(200).json(new ApiResponse(200,channel[0],"User channel fetched successfully"))
 })
 
+//<-----------------------------getWatchHistory---------------------->>>>>>>
+const getWatchHistory=asyncHandler(async(req,res)=>{
+  const user = await User.aggregate([
+    {
+      $match:{
+        _id: new mongoose.types.objectId(req.user._id),//ethe direst requse._id nhi c de skde kkyoki _id object ch store hundi hai te string i form ch mildi sanu tn ethe mongoose direclt km ni krda pipeline ch so sanu mngoose da eh methode likihna penda
+
+      }
+    },
+    {
+      $lookup:{
+        from:"videos",
+        localField:"watchHistory",
+        foreignField:"_id",
+        as:"watchHistory",
+        pipeline:[            // eh sub pipeline a
+          {
+            $lookup:{
+              from:"users",
+              localField:"owner",
+              foreignField:"_id",
+              as:"owner",
+              pipeline:[
+                {
+                  $project:{
+                    fullName:1,
+                    username:1,
+                    avatar:1
+                  }
+                }
+              ]
+            }
+          },
+          {
+            $addFields:{
+              owner:{
+                $first:"$owner"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ])
+
+  return res.status(200).json(
+    new ApiResponse(200,user[0].watchHistory,"Wtch history fetched Succesfuly")
+  )
+})
+
+
 export { registerUser,
           loginUser,
           logoutUser,refreshAccessToken,
           getCurrentUser,
           changeCurrentPassword,updateAccountDetails,
           updateUserAvatar,
-          updateUserCoverImage
+          updateUserCoverImage,
+          getUserChannelProfile,
+          getWatchHistory
  };
 
  // Concept	Explanation
