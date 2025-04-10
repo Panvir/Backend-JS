@@ -1,6 +1,6 @@
 console.log("✅ user.routes.js LOADED")
 import { Router } from "express";
-import { loginUser, logoutUser, refreshAccessToken, registerUser } from "../controllers/user.controller.js";
+import { changeCurrentPassword, getCurrentUser, getUserChannelProfile, getWatchHistory, loginUser, logoutUser, refreshAccessToken, registerUser, updateAccountDetails, updateUserAvatar, updateUserCoverImage } from "../controllers/user.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 const router =Router();
@@ -23,4 +23,14 @@ router.route("/login").post(loginUser)
 //secure routes
 router.route("/logout").post(verifyJWT,logoutUser) //verifuJWT middleware hai then logout controller run hoega
 router.route("/refresh-token").post(refreshAccessToken)//hume yaa verifyjwt vala middlware nhi laya kyoki asi controler ch hi decod elrea c km oh verify jwt ne krna c
+router.route("/change-password").post(verifyJWT,changeCurrentPassword)
+router.route("/current-user").get(verifyJWT,getCurrentUser)
+router.route("/update-account").patch(updateAccountDetails)//post req ni pani kyoki ohtn sara bdlega pathc nl just jo chnagehoea ohi update hoega
+router.route("/avatar").patch(verifyJWT,upload.single("avatar"),updateUserAvatar) //upload single ie why in contrller too we wrttten user.file not files
+router.route("/cover-image").patch(verifyJWT,upload.single("coverImage"),updateUserCoverImage)
+router.route("/c/:username").get(verifyJWT,getUserChannelProfile) //usrname is params c is just a route
+router.route("/history").get(verifyJWT,getWatchHistory)
+
+
+
 export default router
