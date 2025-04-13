@@ -4,6 +4,7 @@ import {User} from "../models/user.model.js"
 import {uploadonCloudinary} from '../utils/cloudinary.js'
 import { ApiResponse } from "../utils/ApiResponse.js";
 import jwt from "jsonwebtoken"
+import mongoose from "mongoose";
 import { channel, subscribe } from "diagnostics_channel";
 
 const generateAccessAndRefreshTokens= async(userId)=>{
@@ -172,8 +173,8 @@ const loginUser= asyncHandler(async (req,res)=>{
     await User.findByIdAndUpdate(
       req.user._id , //eh .user authmiddleware cho aya
       {
-        $set :{ 
-          refreshToken: undefined
+        $unset :{ 
+          refreshToken: 1//this will remove the field from document
         }
       },
       {
@@ -406,7 +407,7 @@ const getWatchHistory=asyncHandler(async(req,res)=>{
   const user = await User.aggregate([
     {
       $match:{
-        _id: new mongoose.types.objectId(req.user._id),//ethe direst requse._id nhi c de skde kkyoki _id object ch store hundi hai te string i form ch mildi sanu tn ethe mongoose direclt km ni krda pipeline ch so sanu mngoose da eh methode likihna penda
+        _id: new mongoose.Types.ObjectId(req.user._id),//ethe direst requse._id nhi c de skde kkyoki _id object ch store hundi hai te string i form ch mildi sanu tn ethe mongoose direclt km ni krda pipeline ch so sanu mngoose da eh methode likihna penda
 
       }
     },
