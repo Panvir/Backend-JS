@@ -21,9 +21,11 @@ app.use(cookieParser())
 //routes import
 import userRouter from "./routes/user.routes.js"
 import commentRouter from "./routes/comment.routes.js"
+import videoRouter from "./routes/video.routes.js"
 
 //routes declaration
 app.use("/api/v1/users",userRouter) // jdo /users te jayega tn oh controll userRouter nu deduga te oh file ch asi working dsi hoi a k kida ki krna
 //http://localhost:8000/api/v1/users/register  ya login etc eve chlega eh kyoki userROUTER CH HAI SARI ROUTES
 app.use("/api/v1/comments",commentRouter)
+app.use("/api/v1/videos",videoRouter)
 export { app }

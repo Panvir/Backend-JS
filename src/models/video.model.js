@@ -2,12 +2,13 @@ import mongoose, { Schema } from "mongoose";
 import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2";// aggregate pipeline tnke data fragments ch load hoe katha hon nalo
 const videoSchema=new Schema({
     videoFile:{
-        type:String,//string url da cloudinary
+        public_id:{ type : String},
+        url:{String},//string url da cloudinary
         required:true
     },
     thumbnail:{
-        type:String,
-        required:true
+        public_id:{ type : String},
+        url:{String},//string url da cloudinary
     },
     title:{
         type:String,
