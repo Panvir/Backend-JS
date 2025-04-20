@@ -4,7 +4,7 @@ import {User} from "../models/user.model.js"
 import {ApiError} from "../utils/ApiError.js"
 import {ApiResponse} from "../utils/ApiResponse.js"
 import {asyncHandler} from "../utils/asyncHandler.js"
-import {uploadOnCloudinary} from "../utils/cloudinary.js"
+import {uploadonCloudinary} from '../utils/cloudinary.js'
 import { response } from "express"
 
 
@@ -81,8 +81,8 @@ const publishAVideo = asyncHandler(async (req, res) => {
     }
 
     //upload on cloudinary
-    const videoFile=await uploadOnCloudinary(videoFileLocalPath)
-    const thumbnail=await uploadOnCloudinary(thumbnailFileLocalPath)
+    const videoFile=await uploadonCloudinary(videoFileLocalPath)
+    const thumbnail=await uploadonCloudinary(thumbnailFileLocalPath)
 
     if(!videoFile){
         throw new ApiError(500,"something went wrong while uploading video file on cloudinary")
@@ -176,7 +176,7 @@ const updateVideo = asyncHandler(async (req, res) => {
         await deleteOnCloudinary(previousVideo.thumbnail?.public_id)
 
         //upload new onw
-        thumbnailUploadOnCloudinary= await uploadOnCloudinary(thumbnailFile);
+        thumbnailUploadOnCloudinary= await uploadonCloudinary(thumbnailFile);
 
         if(!thumbnailUploadOnCloudinary){
             throw new ApiError(500,"something went wrong while updating on cloudinary!!")
